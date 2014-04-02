@@ -1,4 +1,3 @@
-
 var keyboard = new THREEx.KeyboardState(); // dit library object gebruiken we om op elk moment te checken
 
 // get screen width and height
@@ -35,18 +34,31 @@ camera.rotation.order = 'YXZ'
 
 scene.add(camera); 
  
-animate();
 addCube(30,30,30, 0xFF0000, 0, 330);
 
- function animate() {
+var now,
+    dt   = 0,
+    last = timestamp(),
+    step = 1/60;
+
+function frame() {
+  now = timestamp();
+  dt = dt + Math.min(1, (now - last) / 1000);
+  while(dt > step) {
+    dt = dt - step;
+    update();
+  }
+  renderer.render(scene, camera);
+  last = now;
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+function update() {
 	processInput();
-	renderer.render(scene, camera);
-	requestAnimationFrame(function(){
-		animate();
-    });
- }
- 
- function processInput() {
+}
+
+function processInput() {
 	if(keyboard.pressed("up")) {
 		camera.position.z -= Math.cos(camera.rotation.y);
 		camera.position.x -= Math.sin(camera.rotation.y);
@@ -68,5 +80,9 @@ function addCube(x, y, z, clr, xp, zp) {
 	cube.position.z = zp;
 	cube.rotation.y = Math.PI * 15 / 180;
 	scene.add(cube);
+}
+ 
+ function timestamp() {
+  return window.performance && window.performance.now ? window.performance.now() : new Date().getTime();
 }
  

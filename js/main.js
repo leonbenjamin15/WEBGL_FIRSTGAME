@@ -10,8 +10,8 @@ document.body.appendChild(renderer.domElement);  // renderer add zichzelf in de 
  
 var scene = new THREE.Scene;
 
-var cubeGeometry = new THREE.CubeGeometry(1000, 10, 1000);	
-var cubeMaterial = new THREE.MeshLambertMaterial({ color: 0x0000FF })
+var cubeGeometry = new THREE.CubeGeometry(500, 10, 500);	
+var cubeMaterial = new THREE.MeshLambertMaterial({ color: 0x0000FF });
 var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);	// maak een cube
   
 cube.rotation.y = Math.PI * 45 / 180;	// draai de cube 45 graden op de Y-as 
@@ -26,9 +26,17 @@ scene.add(pointLight1);
 var camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 10000); //45 graden lens, ziet niet dichterbij dan 0.1 en niet verderweg dan 10000
 
 // zet de camera positie naar boven (y) en iets naar achter (z) zodat we de cube (die in het midden staat) kunnen zien
-camera.position.y = 40;
-camera.position.z = 400;
+camera.position.y = 50;
+camera.position.z = 500;
 
 scene.add(camera); 
  
-renderer.render(scene, camera); // teken deze scene op het scherm
+animate();
+
+ function animate() {
+	renderer.render(scene, camera);
+	requestAnimationFrame(function(){
+		animate();
+    });
+ }
+ 

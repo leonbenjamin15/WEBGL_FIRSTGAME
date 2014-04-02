@@ -1,3 +1,6 @@
+
+var keyboard = new THREEx.KeyboardState(); // dit library object gebruiken we om op elk moment te checken
+
 // get screen width and height
 var width = window.innerWidth;
 var height = window.innerHeight;
@@ -13,30 +16,57 @@ var scene = new THREE.Scene;
 var cubeGeometry = new THREE.CubeGeometry(500, 10, 500);	
 var cubeMaterial = new THREE.MeshLambertMaterial({ color: 0x0000FF });
 var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);	// maak een cube
-  
+cube.position.y = -5;  
 cube.rotation.y = Math.PI * 45 / 180;	// draai de cube 45 graden op de Y-as 
  
 scene.add(cube);
 
 var pointLight1 = new THREE.PointLight(0xffffff);
-pointLight1.position.set(0, 400, 0);	// licht hang recht boven de scene 
+pointLight1.position.set(0, 400, 600);	// licht hang recht boven de scene 
 scene.add(pointLight1);
 
 // dit wordt onze camera
 var camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 10000); //45 graden lens, ziet niet dichterbij dan 0.1 en niet verderweg dan 10000
 
 // zet de camera positie naar boven (y) en iets naar achter (z) zodat we de cube (die in het midden staat) kunnen zien
-camera.position.y = 50;
+camera.position.y = 20;
 camera.position.z = 500;
+camera.rotation.order = 'YXZ'
 
 scene.add(camera); 
  
 animate();
+addCube(30,30,30, 0xFF0000, 0, 330);
 
  function animate() {
+	processInput();
 	renderer.render(scene, camera);
 	requestAnimationFrame(function(){
 		animate();
     });
  }
+ 
+ function processInput() {
+	if(keyboard.pressed("up")) {
+		camera.position.z -= Math.cos(camera.rotation.y);
+		camera.position.x -= Math.sin(camera.rotation.y);
+	}
+	if(keyboard.pressed("down")) {
+		camera.position.z += Math.cos(camera.rotation.y);
+		camera.position.x += Math.sin(camera.rotation.y);
+	}
+	if(keyboard.pressed("left")) camera.rotation.y+= Math.PI * 1 / 180;
+	if(keyboard.pressed("right")) camera.rotation.y-= Math.PI * 1 / 180;
+ }
+ 
+function addCube(x, y, z, clr, xp, zp) {
+	var cubeGeometry = new THREE.CubeGeometry(x, y, z);	
+	var cubeMaterial = new THREE.MeshLambertMaterial({ color: clr });
+	var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);	// maak een cube
+	cube.position.x = xp;
+	cube.position.y = y/2;
+	cube.position.z = zp;
+	cube.rotation.y = Math.PI * 15 / 180;
+	scene.add(cube);
+}
  

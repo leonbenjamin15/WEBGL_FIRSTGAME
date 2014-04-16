@@ -7,10 +7,12 @@ var height = window.innerHeight;
 var renderer = new THREE.WebGLRenderer({ antialias: true }); // de renderer tekent dingen voor ons
 renderer.setSize(width, height);  // teken op het hele scherm
 // Zet de achtergrondkleur op wit, met doorzichtigheid 1 (dus niet doorzichtig)
-renderer.setClearColorHex(0xFFFFFF, 1);
+renderer.setClearColor(0xFFFFFF, 1);
 document.body.appendChild(renderer.domElement);  // renderer add zichzelf in de webpage, geen <canvas> tag nodig dus
  
 var scene = new THREE.Scene;
+
+var texture = THREE.ImageUtils.loadTexture( 'images/floor_texture01.png' );
 
 var cubeGeometry = new THREE.CubeGeometry(500, 10, 500);	
 var cubeMaterial = new THREE.MeshLambertMaterial({ color: 0x0000FF });
@@ -73,7 +75,7 @@ function processInput() {
  
 function addCube(x, y, z, clr, xp, zp) {
 	var cubeGeometry = new THREE.CubeGeometry(x, y, z);	
-	var cubeMaterial = new THREE.MeshLambertMaterial({ color: clr });
+	var cubeMaterial = new THREE.MeshLambertMaterial({ map:texture, side:THREE.DoubleSide });
 	var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);	// maak een cube
 	cube.position.x = xp;
 	cube.position.y = y/2;

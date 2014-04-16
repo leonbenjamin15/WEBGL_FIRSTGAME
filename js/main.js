@@ -8,7 +8,6 @@ var renderer;
 var scene;
 var camera;
 
-<<<<<<< HEAD
 var renderer = new THREE.WebGLRenderer({ antialias: true }); // de renderer tekent dingen voor ons
 renderer.setSize(width, height);  // teken op het hele scherm
 // Zet de achtergrondkleur op wit, met doorzichtigheid 1 (dus niet doorzichtig)
@@ -27,16 +26,6 @@ addCamera(width, height);
 
 //render floor
 addCube(9000, 0, 9000, 0xFFFFFF, 0, 0, 'images/floor_texture01.png', 0x555555, 20, true, 10, 10);
-/*
->>>>>>> 6578ea33d300ee770bf769159af9191df70bb6f2
-var cubeGeometry = new THREE.CubeGeometry(500, 10, 500);	
-var cubeMaterial = new THREE.MeshLambertMaterial({ color: 0x0000FF });
-var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);	// maak een cube
-cube.position.y = -5;  
-cube.rotation.y = Math.PI * 45 / 180;	// draai de cube 45 graden op de Y-as 
- 
-scene.add(cube);
-*/
 
 var pointLight1 = new THREE.PointLight(0xffffff);
 pointLight1.position.set(0, 400, 600);	// licht hang recht boven de scene 
@@ -50,7 +39,6 @@ var now,
     step = 1/60;
 
 requestAnimationFrame(frame);
-<<<<<<< HEAD
 
 function update() {
 	processInput();
@@ -83,6 +71,3 @@ function addCube(x, y, z, clr, xp, zp) {
  function timestamp() {
   return window.performance && window.performance.now ? window.performance.now() : new Date().getTime();
 }
-=======
->>>>>>> 6578ea33d300ee770bf769159af9191df70bb6f2
- 

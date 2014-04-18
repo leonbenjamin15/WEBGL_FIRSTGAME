@@ -70,22 +70,13 @@ function frame() {
  * @param xp
  * @param zp
  */
-function addCube(x, y, z, clr, xp, zp, img, spec, sh, repeat, s_set, t_set) {
-    var texture = THREE.ImageUtils.loadTexture(img, {}, function(){
-        renderer.render(scene, camera);
-    });
-
-    if(repeat == true){
-        texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-        texture.repeat.set(s_set, t_set);
-    }
-
+function addCube(x, y, z, img, xp, yp, zp) {
     var cubeGeometry = new THREE.CubeGeometry(x, y, z);
-    var cubeMaterial = new THREE.MeshBasicMaterial({color: clr, map: texture, specular: spec, shininess: sh});
+    var texture = THREE.ImageUtils.loadTexture( img );
+    var cubeMaterial = new THREE.MeshLambertMaterial({ map: texture, side:THREE.DoubleSide });
     var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);	// maak een cube
-
     cube.position.x = xp;
-    cube.position.y = y/2;
+    cube.position.y = y/2+yp;
     cube.position.z = zp;
     cube.rotation.y = Math.PI * 15 / 180;
     scene.add(cube);

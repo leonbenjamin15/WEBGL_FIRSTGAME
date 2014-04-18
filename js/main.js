@@ -22,10 +22,10 @@ var pointLight2 = new THREE.PointLight(0xffffff);
 pointLight2.position.set(0, 400, -600);	// licht hang recht boven en achter de scene 
 scene.add(pointLight2);
 
-addCube(30,30,30, 'images/floor_texture01.png', 0, 0, -200);
+addCube(200, 25, 10, 'images/wall01.png', 7, 50, 0, 0, -200);
 
 //render floor
-addCube(500, 10, 500, 'images/floor_texture01.png', 0, -10, 0); // zet de vloer -10 naar beneden zodat alles op de vloer op 0 staat
+addCube(500, 10, 500, 'images/floor_texture01.png', 2, 2, 0, -10, 0); // zet de vloer -10 naar beneden zodat alles op de vloer op 0 staat
 
 var now,
     dt   = 0,

@@ -62,17 +62,25 @@ function frame() {
 }
 
 /**
- * maakt een cube
+ * add cube in de map
  * @param x
  * @param y
  * @param z
- * @param clr
+ * @param img
+ * @param rx
+ * @param ry
  * @param xp
+ * @param yp
  * @param zp
  */
-function addCube(x, y, z, img, xp, yp, zp) {
+function addCube(x, y, z, img, rx, ry, xp, yp, zp) {
+    var texture = THREE.ImageUtils.loadTexture(img);
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.x = 100 / rx;
+    texture.repeat.y = 100 / ry;
+    texture.needsUpdate = true;
+
     var cubeGeometry = new THREE.CubeGeometry(x, y, z);
-    var texture = THREE.ImageUtils.loadTexture( img );
     var cubeMaterial = new THREE.MeshLambertMaterial({ map: texture, side:THREE.DoubleSide });
     var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);	// maak een cube
     cube.position.x = xp;

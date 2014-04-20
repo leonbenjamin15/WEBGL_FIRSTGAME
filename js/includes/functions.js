@@ -5,7 +5,7 @@ function init(width, height){
     renderer = new THREE.WebGLRenderer({ antialias: true }); // de renderer tekent dingen voor ons
     renderer.setSize(width, height);  // teken op het hele scherm
     // Zet de achtergrondkleur op wit, met doorzichtigheid 1 (dus niet doorzichtig)
-    renderer.setClearColorHex(0xFFFFFF, 1);
+    renderer.setClearColorHex(0xBFEFFF, 1);
     document.body.appendChild(renderer.domElement);  // renderer add zichzelf in de webpage, geen <canvas> tag nodig dus
 
     scene = new THREE.Scene;

@@ -44,8 +44,14 @@ function processInput() {
  */
 function update() {
     processInput();
+	detectCollision(0, -200, 10, 200);
+	logPosition();
 }
 
+function logPosition() {
+	console.log("x" + camera.position.x);
+	console.log("z" + camera.position.z);
+}
 /**
  * render frame voor de player
  */
@@ -56,6 +62,7 @@ function frame() {
         dt = dt - step;
         update();
     }
+	
     renderer.render(scene, camera);
     last = now;
     requestAnimationFrame(frame);
@@ -81,15 +88,26 @@ function addCube(x, y, z, img, rx, ry, xp, yp, zp) {
     texture.needsUpdate = true;
 
     var cubeGeometry = new THREE.CubeGeometry(x, y, z);
-    var cubeMaterial = new THREE.MeshLambertMaterial({ map: texture, side:THREE.DoubleSide });
+    var cubeMaterial = new THREE.MeshLambertMaterial({ map: texture, side:THREE.FrontSide });
     var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);	// maak een cube
     cube.position.x = xp;
     cube.position.y = y/2+yp;
     cube.position.z = zp;
-    cube.rotation.y = Math.PI * 15 / 180;
+    cube.rotation.y = Math.PI * 0 / 180;
     scene.add(cube);
 }
 
+function detectCollision(xpos, zpos, depth, width) {
+	var playerSize = 5;
+	var x1 = camera.position.x <(xpos+width/2+playerSize)
+	var x2 = camera.position.x>(xpos-width/2-playerSize)
+	var z1 = camera.position.z<(zpos+depth/2+playerSize)
+	var z2 = camera.position.z>(zpos-depth/2)-playerSize
+	if( x1 && x2 && z1 && z2 ) {
+			//camera.position.x = 0;
+			camera.position.z = zpos+depth/2+playerSize;
+		}
+}
 /**
  *
  * @returns {number}

@@ -7,6 +7,12 @@ function collisionObject(xpos, zpos, depth, width) {
 	this.depth = depth;
 } 
 
+function handlePlayerCollision() {
+	for (var i=0;i<collisionList.length;i++) {
+			detectCollision(collisionList[i].xpos, collisionList[i].zpos, collisionList[i].depth, collisionList[i].width);
+		}
+}
+
 function detectCollision(xpos, zpos, depth, width) {
 	var playerSize = 5;
 	var x1 = xpos+width/2+playerSize;

@@ -27,6 +27,7 @@ addCube(500, 25, 10, 'images/wall01.png', 2, 50, 0, 0, +245);
 addCube(10, 25, 500, 'images/wall01.png', 2, 50, -245, 0, 0);
 addCube(10, 25, 500, 'images/wall01.png', 2, 50, +245, 0, 0);
 
+
 //render floor
 addCube(500, 10, 500, 'images/floor_texture01.png', 2, 2, 0, -10, 0); // zet de vloer -10 naar beneden zodat alles op de vloer op 0 staat
 

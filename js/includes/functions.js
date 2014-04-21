@@ -1,6 +1,7 @@
 /**
  * load canvas screen
  */
+
 function init(width, height){
     renderer = new THREE.WebGLRenderer({ antialias: true }); // de renderer tekent dingen voor ons
     renderer.setSize(width, height);  // teken op het hele scherm
@@ -19,8 +20,8 @@ function addCamera(width, height){
     camera.position.y = 20;
     camera.position.z = 500;
     camera.rotation.order = 'YXZ'
-
-    scene.add(camera);
+	console.log(camera.rotation.y);
+	scene.add(camera);
 }
 
 /**
@@ -38,6 +39,8 @@ function processInput() {
     }
     if(keyboard.pressed("left")) camera.rotation.y+= Math.PI * 1 / 180;
     if(keyboard.pressed("right")) camera.rotation.y-= Math.PI * 1 / 180;
+	
+	if(keyboard.pressed("space")) newShot(camera.position.x, camera.position.z, camera.rotation.y); // schiet in de richting van de camera dus vooruit
 }
 
 /**
@@ -45,10 +48,9 @@ function processInput() {
 **/
 function update() {
     processInput();
-	for (var i=0;i<collisionList.length;i++) {
-		detectCollision(collisionList[i].xpos, collisionList[i].zpos, collisionList[i].depth, collisionList[i].width);
-	}
-	logPosition();
+	handlePlayerCollision();
+	updateShootAnimations();
+	//logPosition();
 }
 
 function logPosition() {

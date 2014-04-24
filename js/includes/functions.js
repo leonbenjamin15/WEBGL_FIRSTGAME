@@ -8,6 +8,7 @@ function init(width, height){
     // Zet de achtergrondkleur op wit, met doorzichtigheid 1 (dus niet doorzichtig)
     renderer.setClearColorHex(0xBFEFFF, 1);
     document.body.appendChild(renderer.domElement);  // renderer add zichzelf in de webpage, geen <canvas> tag nodig dus
+    renderer.domElement.id = 'lockPointer';
 
     scene = new THREE.Scene;
 }
@@ -20,7 +21,7 @@ function addCamera(width, height){
     camera.position.y = 20;
     camera.position.z = 500;
     camera.rotation.order = 'YXZ'
-	console.log(camera.rotation.y);
+
 	scene.add(camera);
 }
 
@@ -28,7 +29,9 @@ function addCamera(width, height){
  * wordt gebruikt bij elke druk op de keyboard
  */
 function processInput() {
-	
+    var canvas = document.getElementById('lockPointer');
+    canvas.addEventListener('click', registerPointerLock, false);
+
     if(keyboard.pressed("up")) {
         camera.position.z -= Math.cos(camera.rotation.y);
         camera.position.x -= Math.sin(camera.rotation.y);

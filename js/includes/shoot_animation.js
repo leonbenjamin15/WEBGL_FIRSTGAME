@@ -1,7 +1,7 @@
 var bulletList = new Array();
 
 function newShot(x, z, direction) {
-	  var sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 10, 10), new THREE.MeshLambertMaterial({ color: 0xEEAD0E }));
+	  var sphere = new THREE.Mesh(new THREE.SphereGeometry(0.8, 10, 10), new THREE.MeshLambertMaterial({ color: 0xFFFF00 }));
       sphere.overdraw = true;
 	  sphere.position.x = x;
 	  sphere.position.z = z;
